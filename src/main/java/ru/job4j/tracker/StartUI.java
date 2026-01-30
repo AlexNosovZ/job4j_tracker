@@ -8,5 +8,6 @@ public class StartUI {
         Item item = new Item();
         String output = formatter.format(item.getCreated());
         System.out.println(output);
+        System.out.println(item);
     }
 }
