@@ -1,14 +1,20 @@
 package ru.job4j.polymorphism;
 
 public class Bus implements Transport {
-    @Override
-    public void move() { }
 
     @Override
-    public void passengers(int count) { }
+    public void move() {
+        System.out.println("Автобус начинает движение");
+    }
+
+    @Override
+    public void passengers(int count) {
+        System.out.println("В автобусе " + count + "  пассажиров.");
+    }
 
     @Override
     public int refuel(int fuel) {
-        return 0;
+        int fuelPrice = 78;
+        return fuel * fuelPrice;
     }
 }
