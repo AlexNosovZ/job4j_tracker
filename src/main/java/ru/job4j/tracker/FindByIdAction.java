@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 public class FindByIdAction implements UserAction {
     private final Output output;
 
-    FindByIdAction(Output output) {
+    public FindByIdAction(Output output) {
         this.output = output;
     }
 
