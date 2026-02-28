@@ -1,38 +1,40 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+//import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tracker {
-    private final Item[] items = new Item[100];
+    private final List<Item> items = new ArrayList<>();
     private int ids = 1;
-    private int size = 0;
+//    private int size = 0;
 
     public Item add(Item item) {
         item.setId(ids++);
-        items[size++] = item;
+        items.add(item);
         return item;
     }
 
-    public Item[] findAll() {
-        return Arrays.copyOf(items, size);
+    public List<Item> findAll() {
+        return items;
     }
 
-    public Item[] findByName(String key) {
-        Item[] tmpItems = new Item[size];
+    public List<Item> findByName(String key) {
+        List<Item> tmpItems = new ArrayList<>();
         int counter = 0;
-        for (int i = 0; i < size; i++) {
-            Item item = items[i];
+        for (int i = 0; i < items.size(); i++) {
+            Item item = items.get(i);
             if (item != null && item.getName().equals(key)) {
-                tmpItems[counter++] = item;
+                tmpItems.add(item);
             }
         }
-        return Arrays.copyOf(tmpItems, counter);
+        return tmpItems;
     }
 
     private int indexOf(int id) {
         int result = -1;
-        for (int index = 0; index < size; index++) {
-            if (items[index].getId() == id) {
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId() == id) {
                 result = index;
                 break;
             }
@@ -42,14 +44,14 @@ public class Tracker {
 
     public Item findById(int id) {
         int index = indexOf(id);
-        return index != -1 ? items[index] : null;
+        return index != -1 ? items.get(index) : null;
     }
 
     public boolean replace(int id, Item item) {
         int index = indexOf(id);
         if (index != -1) {
             item.setId(id);
-            items[index] = item;
+            items.set(index, item);
         }
         return index != -1;
     }
@@ -57,9 +59,7 @@ public class Tracker {
     public void delete(int id) {
         int index = indexOf(id);
         if (index != -1) {
-            System.arraycopy(items, index + 1, items, index, size - index - 1);
-            items[size - 1] = null;
-            size -= 1;
+            items.remove(index);
         }
     }
 }
