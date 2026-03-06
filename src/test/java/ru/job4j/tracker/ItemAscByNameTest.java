@@ -21,8 +21,6 @@ class ItemAscByNameTest {
                 new Item("cccc"),
                 new Item("dddd")
         );
-        for (int i = 0; i < items.size(); i++) {
-            assertThat(items.get(i).getName()).isEqualTo(expected.get(i).getName());
-        }
+        assertThat(items).containsExactlyElementsOf(expected);
     }
 }
